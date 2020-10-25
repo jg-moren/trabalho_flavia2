@@ -52,7 +52,6 @@ class add_checkpoint_Estado extends State<add_checkpoint> {
             child: Column(children: <Widget>[
               SizedBox(height: 30),
 
-              //---------------------------------------Nome--------------------------
               Container(
                 margin: const EdgeInsets.only(top: 0, left: 0, right: 10),
                 height: 60,
@@ -73,7 +72,6 @@ class add_checkpoint_Estado extends State<add_checkpoint> {
                 ),
               ),
 
-              //---------------------------------------Telefone--------------------------
               Container(
                 margin: const EdgeInsets.only(top: 10, left: 0, right: 10),
                 height: 60,
@@ -113,7 +111,6 @@ class add_checkpoint_Estado extends State<add_checkpoint> {
                 ),
               ),
 
-              //---------------------------------------ocorrencia--------------------------
               Container(
                 margin: const EdgeInsets.only(top: 0, left: 0, right: 10),
                 width: 320,
@@ -127,19 +124,17 @@ class add_checkpoint_Estado extends State<add_checkpoint> {
                   },
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Descreva a ocorrência aqui.',
+                    hintText: 'Escreva a mensagem.',
                     hintStyle: TextStyle(fontSize: 18),
                     alignLabelWithHint: true,
                   ),
                 ),
               ),
-              //---------------------------------------enviar ocorrencia--------------------------
               SizedBox(height: 200),
             ]),
           ),
         ),
 
-        //--------------------------------------ligar--------------------------
         bottomSheet: Container(
           height: 70,
           child: Column(children: <Widget>[
