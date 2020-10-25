@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'tela_inicio.dart';
+import 'view/tela_inicio.dart';
 
 
 
