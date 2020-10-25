@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:tela_inicial/view/add_checkpoint.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:tela_inicial/view/add_checkpoint_contatos.dart';
+import 'package:tela_inicial/view/add_checkpoint_mapa.dart';
+import 'package:tela_inicial/view/add_checkpoint_mensagem.dart';
 import 'package:tela_inicial/view/add_contato.dart';
 import 'package:tela_inicial/view/tela_principal.dart';
 import '../view/login.dart';
@@ -58,28 +61,68 @@ class controller_add_contato {
 
 class controller_checkpoint{
   controller_checkpoint.add(context){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => add_checkpoint()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => add_checkpoint_mapa()));
   }
 }
 
-class controller_add_checkpoint {
-  controller_add_checkpoint.proxima(context){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => tela_principal()));
+class controller_add_checkpoint{
+  static salvar(){
+    model.addCheckpoint();
   }
-  controller_add_checkpoint.voltar(context){
+}
+class controller_add_checkpoint_mapa {
+  controller_add_checkpoint_mapa.proxima(context){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => add_checkpoint_contato()));
+  }
+  controller_add_checkpoint_mapa.voltar(context){
     Navigator.pop(context);
   }
 
-  static bool boolCheckpoint(_marcador,_endereco,_contato,_mensagem){
-    if (_marcador !="" && _endereco !="" && _contato !="" && _mensagem !=""){
+   static bool boolCheckpointMapa(LatLng _endereco,String _nome_endereco){
+    if(_endereco != ""){
+      return true;
+    }else{
+      return false;
+    }
+
+  }
+  static setCheckpointMapa(_endereco,_nome_endereco){
+  if (boolCheckpointMapa(_endereco,_nome_endereco)){
+  model.addCheckpointMapa(_endereco,_nome_endereco);
+  }
+  }
+}
+
+class controller_add_checkpoint_contato {
+  controller_add_checkpoint_contato.proxima(context){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => add_checkpoint_mensagem()));
+  }
+  controller_add_checkpoint_contato.voltar(context){
+    Navigator.pop(context);
+  }
+  static setCheckpointContato(_id){
+      model.addCheckpointContato(_id);
+  }
+}
+
+class controller_add_checkpoint_mensagem {
+  controller_add_checkpoint_mensagem.proxima(context){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => tela_principal()));
+  }
+  controller_add_checkpoint_mensagem.voltar(context){
+    Navigator.pop(context);
+  }
+
+  static bool boolCheckpointMensagem(_marcador,_mensagem){
+    if (_marcador !="" &&  _mensagem !=""){
       return true;
     }else{
       return false;
     }
   }
-  static setCheckpoint(_marcador,_endereco,_contato,_mensagem){
-    if (boolCheckpoint(_marcador,_endereco,_contato,_mensagem)){
-      model.addCheckpoint(_marcador,_endereco,_contato,_mensagem);
+  static setCheckpointMensagem(_marcador,_mensagem){
+    if (boolCheckpointMensagem(_marcador,_mensagem)){
+      model.addCheckpointMensagem(_marcador,_mensagem);
     }
   }
 

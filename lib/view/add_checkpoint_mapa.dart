@@ -7,15 +7,14 @@ import 'package:tela_inicial/model/model.dart';
 
 
 
-class Mapa extends StatefulWidget {
+class add_checkpoint_mapa extends StatefulWidget {
   @override
-  Estado createState() => Estado();
+  add_checkpoint_mapa_estado createState() => add_checkpoint_mapa_estado();
 
   Widget build(BuildContext context) => Scaffold();
 }
 
-class Estado extends State<Mapa> {
-  var controlador_endereco = TextEditingController(text: "");
+class add_checkpoint_mapa_estado extends State<add_checkpoint_mapa> {
   static int botao = 0;
   Future<LocationData> _getUserLocation;
   LatLng _markerLocation;
@@ -84,10 +83,39 @@ class Estado extends State<Mapa> {
   @override
 
   Widget build(BuildContext context) {
-    controlador_endereco.text = _resultAddress;
+
+    print(_resultAddress);
+    print("----------------");
+    print(_markerLocation);
 
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: estilo.cor,
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(right: 360),
+
+            child: Row(children: <Widget>[
+              Container(
+                child: IconButton(
+                  icon: Icon(
+                    Icons.clear,
+                    color: Colors.black,
+                  ),
+                  onPressed: () {
+                    controller_add_checkpoint_mapa.voltar(context);
+                  },
+                ),
+              ),
+            ]),
+          ),
+        ],
+      ),
+
+
+
 
 
       body: SafeArea(
@@ -99,7 +127,24 @@ class Estado extends State<Mapa> {
                 builder: (context, snapshot) {
                   switch (snapshot.hasData) {
                     case true:
-                      return MyMap();
+                      return MyMap(
+                        markerLocation: _markerLocation,
+                        userLocation: _userLocation,
+                          onTap: (location) async {
+                          setState(() {
+                            botao = 1;
+                            _markerLocation = location;
+
+                            if (_markerLocation != null) {
+                              getSetAddress(Coordinates(
+                                  _markerLocation.latitude,
+                                  _markerLocation.longitude));
+                            }
+                            reassemble();
+
+                          });
+                        },
+                      );
                     default:
                       return Center(
                         child: CircularProgressIndicator(),
@@ -111,11 +156,9 @@ class Estado extends State<Mapa> {
           ],
         ),
       ),
-
       bottomNavigationBar: Container(
-        height: 75.0,
         decoration: new BoxDecoration(
-          color: estilo.cor,
+          color: Colors.white,
           boxShadow: <BoxShadow>[
             BoxShadow(
               color: Colors.grey,
@@ -123,7 +166,27 @@ class Estado extends State<Mapa> {
             ),
           ],
         ),
-
+        child: Container(
+          margin: const EdgeInsets.only(top: 10, left: 50, right: 50, bottom: 10),
+          width: MediaQuery.of(context).size.width * 0.9,
+          height: 50.0,
+          child: RaisedButton(
+            onPressed: () {
+              if(controller_add_checkpoint_mapa.boolCheckpointMapa(_markerLocation,_resultAddress)){
+                controller_add_checkpoint_mapa.setCheckpointMapa(_markerLocation,_resultAddress);
+                controller_add_checkpoint_mapa.proxima(context);
+              }
+            },
+            child: const Text(
+              'Confirmar local de ocorrência',
+              style: TextStyle(fontSize: 19, color: Colors.white),
+            ),
+            color: botao != 0 ? estilo.cor : Colors.grey,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30.0),
+            ),
+          ),
+        ),
       ),
 
 
@@ -149,12 +212,14 @@ class _MyMapState extends State<MyMap> {
       initialCameraPosition: CameraPosition(target: widget.userLocation ?? LatLng(-22.9331, -43.1774),),
       minMaxZoomPreference:  MinMaxZoomPreference(13,17),
       myLocationEnabled: true,
-      markers:  [
-        for(int contar_points= 0 ; contar_points < model.Checkpoints.length ; contar_points++)Marker(
-            markerId: MarkerId("0"),
-            position: model.Checkpoints[contar_points][1][0]
-        )
+      markers: widget.markerLocation != null
+          ? [
+        Marker(
+            markerId: MarkerId(""),
+            position: widget.markerLocation),
       ].toSet()
+          : null,
+      onTap: widget.onTap,
     );
   }
 }
