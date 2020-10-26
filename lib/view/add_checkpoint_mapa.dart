@@ -84,9 +84,6 @@ class add_checkpoint_mapa_estado extends State<add_checkpoint_mapa> {
 
   Widget build(BuildContext context) {
 
-    print(_resultAddress);
-    print("----------------");
-    print(_markerLocation);
 
 
     return Scaffold(
@@ -179,7 +176,7 @@ class add_checkpoint_mapa_estado extends State<add_checkpoint_mapa> {
             },
             child: const Text(
               'Confirmar local de ocorrência',
-              style: TextStyle(fontSize: 19, color: Colors.white),
+              style: TextStyle(fontSize: 19, color: Colors.black),
             ),
             color: botao != 0 ? estilo.cor : Colors.grey,
             shape: RoundedRectangleBorder(

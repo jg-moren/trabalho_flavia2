@@ -4,6 +4,7 @@ import 'package:tela_inicial/view/add_checkpoint_contatos.dart';
 import 'package:tela_inicial/view/add_checkpoint_mapa.dart';
 import 'package:tela_inicial/view/add_checkpoint_mensagem.dart';
 import 'package:tela_inicial/view/add_contato.dart';
+import 'package:tela_inicial/view/checkpoint_ver.dart';
 import 'package:tela_inicial/view/tela_principal.dart';
 import '../view/login.dart';
 import '../model/model.dart';
@@ -62,6 +63,12 @@ class controller_add_contato {
 class controller_checkpoint{
   controller_checkpoint.add(context){
     Navigator.push(context, MaterialPageRoute(builder: (context) => add_checkpoint_mapa()));
+  }
+  controller_checkpoint.ver(context){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => checkpoint_ver()));
+  }
+  controller_checkpoint.voltar(context){
+    Navigator.pop(context);
   }
 }
 

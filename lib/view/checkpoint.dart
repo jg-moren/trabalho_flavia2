@@ -6,6 +6,7 @@ import '../model/model.dart';
 
 // ignore: camel_case_types, must_be_immutable
 class checkpoint extends  StatelessWidget  {
+  static int id;
 
   @override
 
@@ -43,17 +44,22 @@ class checkpoint extends  StatelessWidget  {
                   Image.asset("assents/point.png",cacheHeight: 70,),
               Container(
                 width: 175,
-                child:
-                RichText(
-                  textAlign: TextAlign.center,
-                    text: TextSpan(
-                    style: new TextStyle(
-                      color: Colors.black,
-                    ),
-                    children: <TextSpan>[
-                      TextSpan(text: '   ${model.Checkpoints[contar_check][0]} \n  ', style: TextStyle( fontSize: 25 )),
-                      TextSpan(text: '${model.Checkpoints[contar_check][2]}' , style: TextStyle( fontSize: 15 )),
-                    ])
+                child:FlatButton(
+                  onPressed: (){
+                    id=contar_check;
+                    controller_checkpoint.ver(context);
+                  },
+                  child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                          style: new TextStyle(
+                            color: Colors.black,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(text: '   ${model.Checkpoints[contar_check][0]} \n  ', style: TextStyle( fontSize: 25 )),
+                            TextSpan(text: '${model.Checkpoints[contar_check][2]}' , style: TextStyle( fontSize: 15 )),
+                          ])
+                  ),
                 ),
               ),
                   IconButton(

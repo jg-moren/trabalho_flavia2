@@ -42,11 +42,10 @@ class tela_inicio extends StatelessWidget {
                     'LOGIN',
                     style: TextStyle(
                       fontSize: 25,
-                      color: Color(0xffBBBBBB),
-                      fontFamily: 'TitilliumWeb',
+                      color: Colors.black
                     ),
                   ),
-                  color: Color(0xffffffff),
+                  color: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(30.0),
                   ),
