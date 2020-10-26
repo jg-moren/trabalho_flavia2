@@ -71,15 +71,6 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   fonts:
-    - family: TitilliumWeb
-      fonts:
-        - asset: fonts/TitilliumWeb-SemiBold.ttf
-    - family: Roboto
-      fonts:
-        - asset: fonts/Roboto-Regular.ttf
-    - family: Quicksand
-      fonts:
-        - asset: fonts/Quicksand-Bold.ttf
 
   # For details regarding fonts from package dependencies,
     # see https://flutter.dev/custom-fonts/#from-packages
